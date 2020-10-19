@@ -38,11 +38,7 @@ def index():
             if i.lower() == language.lower():
                 color=k['color']
         
-
-
     return render_template("index.html", language=language, json=json, color=color)
 
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
