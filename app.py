@@ -14,13 +14,16 @@ def index():
     else:
         language = request.args.get("search")
 
-    if language.lower() == "c#":
-        language = "Csharp"
 
     request_raw = ""
     json = ""
+    color = ""
+
 
     if language != None:
+        if language.lower() == "c#":
+            language = "Csharp"
+
         url = "https://api.github.com/search/repositories?q=language:"+language+"&sort=stars&page=1"
         request_raw = requests.get(url)
         
@@ -29,7 +32,6 @@ def index():
         
         json = request_raw.json()
         
-        color = ""
         url_color = "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
         json_color_raw = requests.get(url_color)
         json_color = json_color_raw.json()
@@ -41,4 +43,4 @@ def index():
     return render_template("index.html", language=language, json=json, color=color)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
