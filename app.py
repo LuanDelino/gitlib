@@ -8,17 +8,14 @@ CORS(app)
 @app.route("/", methods=["GET", "POST"])
 def index():
 
-    language = ""
     if request.method == 'POST':
         language = request.form.get("search")
     else:
         language = request.args.get("search")
 
-
     request_raw = ""
     json = ""
     color = ""
-
 
     if language != None:
         if language.lower() == "c#":
