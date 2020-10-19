@@ -1,0 +1,30 @@
+.content {
+    padding: 3em 0 0 0;
+}
+
+.title {
+    text-align: center;
+}
+
+.image_card {
+    width:60%;
+    margin: 1rem auto;
+}
+
+.card_main {
+    border: 0.05px solid #ccc;
+    margin: 1rem;   
+}
+
+.card-img {
+    border-radius: 50%;
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FCF4F2 !important;
+}

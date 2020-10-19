@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %} GitLib {{ language }}{% endblock %}
+
+{% block content %}
+
+    <div class="title">
+        <h2>Welcome to GitLib! A Web app to search github libs.</h2>
+        <p>What language do you want to search?</p>
+        <form class="form-inline offset-5" method="POST" action="{{ url_for('index') }}" autocomplete="off">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+            <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">Search</button>
+        </form>
+    </div>
+    <hr>
+    {% if language %}
+    <div class="container">
+        <div class="row">
+        {% for i in json['items'] %}
+            <div class="col-sm-6">
+                <div class="card_main">
+                    <div class="shadow card-body rounded">
+                        <div class="row">
+
+                            <!-- Image -->
+                            <div class="col-sm-4">
+                                <div class="image_card">
+                                    <img src="{{ i['owner']['avatar_url'] }}" class="card-img-top"
+                                        alt="icon-git" style="border-radius: 20%;">
+                                </div>
+                            </div>
+
+                            <!-- Text -->
+                            <div class="col-sm-8">
+                                <div class="card_text">
+                                    <h5 class="card-title">{{ i['name'] }}</h5>
+                                    <p class="card-text">
+                                        <svg width="1em" height="1em" viewBox="0 0 15 24" class="bi bi-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="8" cy="8" r="8"/>
+                                        </svg>
+                                        {{ i['language'] }}
+                                    </p>
+                                    <p class="card-text">
+                                        <svg width="1em" viewBox="0 0 16 20" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                        </svg>                                      
+                                        {{ i['stargazers_count'] }}
+                                    </p>
+                                    <p class="card-text">
+                                        <svg aria-label="forks" class="octicon octicon-repo-forked" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
+                                            <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+                                        </svg>
+                                        {{ i['forks'] }}
+                                    </p>
+                                    <p class="card-text">Owner: {{ i['owner']['login'] }}</p>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalKnowMore">Know
+                                        more!</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="container" style="text-align: center;">
+        <h4>Waiting for a search!</h4>
+        <br/>
+        <img src="{{ url_for('static', filename='img/waiting.gif') }}" alt="">
+    </div>
+    {% endif %}
+{% endblock %}
